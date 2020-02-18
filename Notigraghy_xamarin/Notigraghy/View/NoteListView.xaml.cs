@@ -9,12 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace Notigraghy.View
 {
-	public partial class CreateNoteView : ContentView
+	[XamlCompilation(XamlCompilationOptions.Compile)] //TODO : wina 얘가 무슨 기능 하는지 찾아보기
+	public partial class NoteListView : ContentView
 	{
-		public CreateNoteView ()
+		public NoteListView ()
 		{
 			InitializeComponent ();
-            this.BindingContext = new CreateNoteViewModel();
+            this.BindingContext = new NoteListViewModel();
         }
 	}
 }

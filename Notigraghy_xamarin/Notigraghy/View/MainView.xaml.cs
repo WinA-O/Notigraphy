@@ -8,8 +8,9 @@ namespace Notigraghy.View
         public MainView()
         {
             InitializeComponent();
-            this.BindingContext = ViewModel = new MainViewModel(this);
-           
+            this.BindingContext = ViewModel = new MainViewModel();
+
+            
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Notigraghy.Model;
 
 namespace Notigraghy.View
 {
-    class CreateNoteViewModel
+    public class CreateNoteViewModel : ViewModelBase
     {
+        public CreateNoteViewModel()
+        {
+
+        }
     }
 }

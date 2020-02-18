@@ -19,6 +19,11 @@ namespace Notigraghy.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            GlobalResources.ScreenHeight = (double)Resources.DisplayMetrics.HeightPixels;
+            GlobalResources.ScreenWidth = (double)Resources.DisplayMetrics.WidthPixels;
+            GlobalResources.Dpi = (double)Resources.DisplayMetrics.DensityDpi;
+
             LoadApplication(new App());
         }
     }

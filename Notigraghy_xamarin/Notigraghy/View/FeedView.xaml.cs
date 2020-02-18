@@ -9,12 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace Notigraghy.View
 {
-	public partial class CreateNoteView : ContentView
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class FeedView : ContentView
 	{
-		public CreateNoteView ()
+		public FeedView ()
 		{
 			InitializeComponent ();
-            this.BindingContext = new CreateNoteViewModel();
+            this.BindingContext = new FeedViewModel();
         }
 	}
 }
