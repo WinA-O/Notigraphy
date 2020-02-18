@@ -62,8 +62,8 @@ namespace Notigraghy.View
 
 
         //Constructor
-        private MainPage View {get;set;}
-        public MainViewModel(MainPage view )
+        private MainView View {get;set;}
+        public MainViewModel(MainView view )
         {
             this.View = view;
             InitializeCommands();            

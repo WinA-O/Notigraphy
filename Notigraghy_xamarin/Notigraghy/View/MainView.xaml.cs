@@ -2,10 +2,10 @@
 
 namespace Notigraghy.View
 {
-    public partial class MainPage : ContentPage
+    public partial class MainView : ContentPage
     {
         public MainViewModel ViewModel;
-        public MainPage()
+        public MainView()
         {
             InitializeComponent();
             this.BindingContext = ViewModel = new MainViewModel(this);
