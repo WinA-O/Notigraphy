@@ -1,5 +1,6 @@
 ﻿using Notigraghy.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
@@ -43,55 +44,21 @@ namespace Notigraghy.View
         }
         private string _Feedthumnail;
 
-        public ObservableCollection<MemoList> MemoList
+        public NoteListModel MemoList
         {
             get { return _MemoList; }
             set { _MemoList = value; OnPropertyChanged("MemoList"); }
         }
-        private ObservableCollection<MemoList> _MemoList;
+        private NoteListModel _MemoList;
 
         public double ViewWidth;
 
         //Constructor
-        public FeedViewModel()
+        public FeedViewModel(NoteListModel noteList)
         {
-            MemoList = new ObservableCollection<MemoList>();
+            //최초 1회, 혹은 리스트에 변동이 생겼을 때만 리스트를 생성 혹은 엎어치도록
+            this.MemoList = noteList;
             InitializeUI();
-            MakeNoteList();
-        }
-
-        private void MakeNoteList()
-        {
-            MemoList memoList1 = new MemoList()
-            {
-                ID = "1",
-                Date = DateTime.Now,
-                ThumNail = "TempImg1.png",
-                MainText = "Json으로 관리하자"
-            };
-
-            MemoList memoList2 = new MemoList()
-            {
-                ID = "2",
-                Date = DateTime.Now,
-                ThumNail = "TempImg2.png",
-                MainText = "Json으로 관리하자s"
-            };
-
-            MemoList memoList3 = new MemoList()
-            {
-                ID = "3",
-                Date = DateTime.Now,
-                ThumNail = "TempImg3.png",
-                MainText = "Json으로 관리하자d"
-            };
-
-            this.MemoList.Add(memoList1);
-            this.MemoList.Add(memoList2);
-            this.MemoList.Add(memoList3);
-            this.MemoList.Add(memoList1);
-            this.MemoList.Add(memoList2);
-            this.MemoList.Add(memoList3);
         }
 
         public void InitializeUI()
@@ -102,31 +69,5 @@ namespace Notigraghy.View
         }
     }
 
-    public class MemoList
-    {
-        public string ID { get; set; }
-        public DateTime Date { get; set; }
-        public string ThumNail { get; set; }
-        //public byte[] ThumNail { get; set; }
-        //[JsonIgnore]
-        //public ImageSource ThumNailSource
-        //{
-        //    get
-        //    {
-        //        if (ThumNail != null)
-        //        {
-        //            return Xamarin.Forms.ImageSource.FromStream(() =>
-        //            {
-        //                return new MemoryStream(ThumNail);
-        //            });
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-
-        //    }
-        //}
-        public string MainText { get; set; }
-    }
+  
 }

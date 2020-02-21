@@ -3,41 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notigraghy.View.FeedView">
 
-    <AbsoluteLayout >
-        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0" BackgroundColor="#FFFFFF">
-
-            <ListView ItemsSource="{Binding MemoList}" 
+    <ListView ItemsSource="{Binding MemoList.NoteList}" 
                        SeparatorVisibility="None"      
                        CachingStrategy="RecycleElement"
-                       RowHeight="{Binding FeedHeight}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ContentView>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="{Binding DeviceWidth}"/>
-                                    </Grid.RowDefinitions>
+                       RowHeight="{Binding FeedHeight}" BackgroundColor="#FFFFFF" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ContentView>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="{Binding DeviceWidth}"/>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-                                    <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding Date, StringFormat='{}{0:yyyy년MM월dd일}'}" TextColor="Black" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start" Margin="5,0,0,0"/>
-                                        <Image Grid.Column="1" Source="YellowStar.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,10,0"/>
-                                    </Grid>
+                            <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Date, StringFormat='{}{0:yyyy년MM월dd일}'}" TextColor="Black" FontSize="15" VerticalOptions="Center" HorizontalOptions="Start" Margin="16,8,0,0"/>
+                                <Image Grid.Column="1" Source="YellowStar.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,16,0"/>
+                            </Grid>
 
-                                    <Frame Grid.Row="1" HasShadow="False" BorderColor="LightGray" Padding="1">
-                                        <Image Source="{Binding ThumNail}" Aspect="Fill" BackgroundColor="LightCoral"/>
-                                    </Frame>
-                                </Grid>
-                            </ContentView>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollView>
-    </AbsoluteLayout>
+                            <Frame Grid.Row="1" HasShadow="False" BorderColor="LightGray" Padding="1">
+                                <Image Source="{Binding ThumNailSource}" Aspect="Fill" BackgroundColor="LightCoral"/>
+                            </Frame>
+
+                            <Label Grid.Row="2" Text="{Binding MainText}" Margin="16,8" />
+
+                            <Frame Grid.Row="3" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="0.5" HasShadow="False"/>
+                        </Grid>
+                    </ContentView>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
 </ContentView>

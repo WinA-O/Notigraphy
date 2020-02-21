@@ -1,12 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Notigraghy.View.CreateNoteView">
+             x:Class="Notigraghy.View.CreateNoteView"
+             xmlns:ctr="clr-namespace:Notigraghy.Renderers">
     <ContentView.Content>
-        <StackLayout BackgroundColor="LightBlue">
-            <Label Text="글쓰기추가하장"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="#FFFFFF" Padding="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/><!--사진추가화면-->
+                <RowDefinition Height="1*"/><!--Entry-->
+                <RowDefinition Height="40"/><!--저장버튼-->
+            </Grid.RowDefinitions>
+
+            <!--AddPhoto버튼-->
+            <ImageButton  Grid.Row="0" Source="AddPhoto.png" VerticalOptions="FillAndExpand" HorizontalOptions="End" 
+                               Command="{Binding AddPhotoCommand}" Aspect="AspectFill" WidthRequest="80" HeightRequest="30" Padding="0" 
+                          BackgroundColor="Transparent">
+                <ImageButton.Triggers>
+                    <DataTrigger TargetType="ImageButton" Binding="{Binding IsPhotoLoading}" Value="true">
+                        <Setter Property="Frame.IsVisible" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="ImageButton" Binding="{Binding IsPhotoLoading}" Value="false">
+                        <Setter Property="Frame.IsVisible" Value="true"/>
+                    </DataTrigger>
+                </ImageButton.Triggers>
+            </ImageButton>
+
+            <!--사진 로드 후-->
+            <Frame Grid.Row="0" IsVisible="{Binding IsPhotoLoaded}" Padding="1" BackgroundColor="LightGray" 
+                   VerticalOptions="FillAndExpand" HorizontalOptions="Center" HasShadow="False"
+                   WidthRequest="200" HeightRequest="200">
+                <ImageButton Source="{Binding TempNoteModel.ThumNailSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                               Command="{Binding AddPhotoCommand}"  BackgroundColor="LightCoral" Aspect="AspectFill"/>
+              
+            </Frame>
+            
+
+            <Frame Grid.Row="1" Padding="1" BackgroundColor="LightGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HasShadow="False">
+                <Frame Padding="8" BackgroundColor="#FFFFFF" HasShadow="False">
+                    <ctr:MyEditor Text="{Binding TempNoteModel.MainText}" FontSize="14" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                              Placeholder="Latte is a holse..." PlaceholderColor="LightGray"/>
+                </Frame>
+            </Frame>
+           
+            <Button Grid.Row="2" Text="SAVE" Command="{Binding SaveNoteCommand}" CornerRadius="30" HeightRequest="32" TextColor="#FFFFFF"
+                          BackgroundColor="LightCoral" VerticalOptions="Center" HorizontalOptions="Center" Padding="0"/>
+        </Grid>
     </ContentView.Content>
 </ContentView>

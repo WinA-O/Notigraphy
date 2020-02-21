@@ -1,16 +1,16 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-
+using Android.Widget;
+using Notigraghy.Droid.Photo;
+using Notigraghy.Interface;
+using Xamarin.Forms;
+[assembly: Dependency(typeof(Notigraghy.Droid.MainActivity))]
 namespace Notigraghy.Droid
 {
-    [Activity(Label = "Notigraghy", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Label = "Notigraghy", Icon = "@drawable/YellowStar", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IAndroid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,6 +25,17 @@ namespace Notigraghy.Droid
             GlobalResources.Dpi = (double)Resources.DisplayMetrics.DensityDpi;
 
             LoadApplication(new App());
+        }
+
+        public void GalleryOpen()
+        {
+            var intent = new Intent(Forms.Context, typeof(GalleryActivity));
+            Forms.Context.StartActivity(intent);
+        }
+
+        public void ShowToastMessage(string message)
+        {
+            Toast.MakeText(this, message, ToastLength.Long).Show();
         }
     }
 }

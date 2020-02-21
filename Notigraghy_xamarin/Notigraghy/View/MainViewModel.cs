@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Notigraghy.Model;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using Notigraghy.Model;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace Notigraghy.View
@@ -19,13 +16,90 @@ namespace Notigraghy.View
         }
         private ContentView _BodyView;
 
+        //메인 뷰에서 리스트를 관리하기로 한다
+        public NoteListModel MyNoteInDevice { get; set; }
+
         //Constructor
         public MainViewModel()
         {
-            BodyView = new FeedView();
+            //이곳에 진입 전에 디바이스에 저장된 노트정보를 가져와서 셋해줘야 함
+            MyNoteInDevice = new NoteListModel();
+            MakeNoteList();
+
             InitializeCommands();
+
+            //BodyView = new FeedView(MemoList);
+
+            MainEventRouter.Instance.OnAfterCreateNote += OnAfterCreateNote;
         }
 
+        private void OnAfterCreateNote(NoteModel NewNote)
+        {
+            MyNoteInDevice.NoteList.Add(NewNote);
+            MyNoteInDevice.NoteList = MyNoteInDevice.NoteList.OrderByDescending(p => p.Date).ToList();
+            BodyView = new FeedView(MyNoteInDevice);
+        }
+
+        //하드코딩
+        private void MakeNoteList()
+        {
+            //var memoList1 = new NoteModel()
+            //{
+            //    ID = "1",
+            //    Date = DateTime.Now.AddDays(-1),
+            //    ThumNail = "test1.jpg",
+            //    MainText = "이건 사실 하드코딩 덩어리지만 어쩔수없죠 빨리 만들어 보는게 중요하지 않을까용\r\n그래더 주영님이 잘 도와주셔서 넘나 수월할 수 있는것이얌"
+            //};
+
+            //var memoList2 = new NoteModel()
+            //{
+            //    ID = "2",
+            //    Date = DateTime.Now.AddDays(-2),
+            //    ThumNail = "test2.jpg",
+            //    MainText = "이건 사실 하드코딩 덩어리지만 어쩔수없죠 빨리 만들어 보는게 중요하지 않을까용\r\n그래더 주영님이 잘 도와주셔서 넘나 수월할 수 있는것이얌"
+            //};
+
+            //var memoList3 = new NoteModel()
+            //{
+            //    ID = "3",
+            //    Date = DateTime.Now.AddDays(-3),
+            //    ThumNail = "test3.jpg",
+            //    MainText = "이건 사실 하드코딩 덩어리지만 어쩔수없죠 빨리 만들어 보는게 중요하지 않을까용\r\n그래더 주영님이 잘 도와주셔서 넘나 수월할 수 있는것이얌"
+            //};
+
+            //var memoList4 = new NoteModel()
+            //{
+            //    ID = "4",
+            //    Date = DateTime.Now.AddDays(-4),
+            //    ThumNail = "test4.jpg",
+            //    MainText = "이건 사실 하드코딩 덩어리지만 어쩔수없죠 빨리 만들어 보는게 중요하지 않을까용\r\n그래더 주영님이 잘 도와주셔서 넘나 수월할 수 있는것이얌"
+            //};
+
+            //var memoList5 = new NoteModel()
+            //{
+            //    ID = "5",
+            //    Date = DateTime.Now.AddDays(-5),
+            //    ThumNail = "test5.jpg",
+            //    MainText = "이건 사실 하드코딩 덩어리지만 어쩔수없죠 빨리 만들어 보는게 중요하지 않을까용\r\n그래더 주영님이 잘 도와주셔서 넘나 수월할 수 있는것이얌"
+            //};
+
+            //var memoList6 = new NoteModel()
+            //{
+            //    ID = "6",
+            //    Date = DateTime.Now.AddDays(-6),
+            //    ThumNail = "test6.jpg",
+            //    MainText = "이건 사실 하드코딩 덩어리지만 어쩔수없죠 빨리 만들어 보는게 중요하지 않을까용\r\n그래더 주영님이 잘 도와주셔서 넘나 수월할 수 있는것이얌"
+            //};
+
+            //this.MyNoteInDevice.NoteList.Add(memoList1);
+            //this.MyNoteInDevice.NoteList.Add(memoList2);
+            //this.MyNoteInDevice.NoteList.Add(memoList3);
+            //this.MyNoteInDevice.NoteList.Add(memoList4);
+            //this.MyNoteInDevice.NoteList.Add(memoList5);
+            //this.MyNoteInDevice.NoteList.Add(memoList6);
+
+            //BodyView = new FeedView(MyNoteInDevice);
+        }
         //Commands/////////////////////////////////////////
 
         public Command TabFeedCommand { get; set; }
@@ -44,13 +118,13 @@ namespace Notigraghy.View
         //피드 선택 시
         private void ExecuteTabFeed(object obj)
         {
-            BodyView = new FeedView();
+            BodyView = new FeedView(MyNoteInDevice);
         }
 
         //리스트 선택 시
         private void ExecuteTabList(object obj)
         {
-            BodyView = new NoteListView();
+            BodyView = new NoteListView(MyNoteInDevice);
         }
 
         //글쓰기 선택 시

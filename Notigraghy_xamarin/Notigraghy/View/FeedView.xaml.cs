@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Notigraghy.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,10 @@ namespace Notigraghy.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FeedView : ContentView
 	{
-		public FeedView ()
+		public FeedView (NoteListModel noteList)
 		{
 			InitializeComponent ();
-            this.BindingContext = new FeedViewModel();
+            this.BindingContext = new FeedViewModel(noteList);
         }
 	}
 }

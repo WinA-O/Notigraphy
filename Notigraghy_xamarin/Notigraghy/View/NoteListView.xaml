@@ -7,8 +7,8 @@
         <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0" BackgroundColor="#FFFFFF">
             <StackLayout Padding="0" Margin="0">
                 <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="0.5" HasShadow="False"/>
-                
-                <ListView ItemsSource="{Binding MemoList}" 
+
+                <ListView ItemsSource="{Binding MemoList.NoteList}" 
                        SeparatorVisibility="None"      
                        CachingStrategy="RecycleElement"
                        RowHeight="{Binding ListRowHeight}">
