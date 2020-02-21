@@ -4,7 +4,7 @@
              x:Class="Notigraghy.View.FeedView">
 
     <AbsoluteLayout >
-        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0">
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0" BackgroundColor="#FFFFFF">
 
             <ListView ItemsSource="{Binding MemoList}" 
                        SeparatorVisibility="None"      
@@ -30,7 +30,7 @@
                                     </Grid>
 
                                     <Frame Grid.Row="1" HasShadow="False" BorderColor="LightGray" Padding="1">
-                                        <Image Source="{Binding ThumNail}" Aspect="Fill" BackgroundColor="LightCoral" />
+                                        <Image Source="{Binding ThumNail}" Aspect="Fill" BackgroundColor="LightCoral"/>
                                     </Frame>
                                 </Grid>
                             </ContentView>

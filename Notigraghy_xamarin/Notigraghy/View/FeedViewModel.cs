@@ -67,7 +67,7 @@ namespace Notigraghy.View
                 ID = "1",
                 Date = DateTime.Now,
                 ThumNail = "TempImg1.png",
-                Note = "Json으로 관리하자"
+                MainText = "Json으로 관리하자"
             };
 
             MemoList memoList2 = new MemoList()
@@ -75,7 +75,7 @@ namespace Notigraghy.View
                 ID = "2",
                 Date = DateTime.Now,
                 ThumNail = "TempImg2.png",
-                Note = "Json으로 관리하자s"
+                MainText = "Json으로 관리하자s"
             };
 
             MemoList memoList3 = new MemoList()
@@ -83,7 +83,7 @@ namespace Notigraghy.View
                 ID = "3",
                 Date = DateTime.Now,
                 ThumNail = "TempImg3.png",
-                Note = "Json으로 관리하자d"
+                MainText = "Json으로 관리하자d"
             };
 
             this.MemoList.Add(memoList1);
@@ -127,6 +127,6 @@ namespace Notigraghy.View
 
         //    }
         //}
-        public string Note { get; set; }
+        public string MainText { get; set; }
     }
 }

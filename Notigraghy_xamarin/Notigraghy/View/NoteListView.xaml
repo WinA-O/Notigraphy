@@ -2,10 +2,43 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notigraghy.View.NoteListView">
-        
-    <StackLayout BackgroundColor="BlueViolet">
-            <Label Text="리스트뷰"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+    <AbsoluteLayout >
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Padding="0" BackgroundColor="#FFFFFF">
+            <StackLayout Padding="0" Margin="0">
+                <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="0.5" HasShadow="False"/>
+                
+                <ListView ItemsSource="{Binding MemoList}" 
+                       SeparatorVisibility="None"      
+                       CachingStrategy="RecycleElement"
+                       RowHeight="{Binding ListRowHeight}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ContentView>
+                                    <StackLayout>
+                                        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="7*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding Date, StringFormat='{}{0:MM월dd일}'}" TextColor="Black" FontSize="12" VerticalOptions="Start" HorizontalOptions="Start" Margin="0"/>
+
+                                            <Label Grid.Column="1" Text="{Binding MainText}" FontSize="12" TextColor="Black" VerticalOptions="Start" HorizontalOptions="Center"/>
+
+                                            <Image Grid.Column="2" Source="YellowStar.png" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="End" Margin="8"/>
+                                        </Grid>
+
+                                        <Frame VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" Padding="0.5" HasShadow="False"/>
+                                    </StackLayout>
+                                </ContentView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
 </ContentView>
